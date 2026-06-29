@@ -41,7 +41,7 @@ function Chat() {
     } catch (error) {
       console.log("Error loading messages:", error);
     } finally {
-      setLoadingMessages(false); // fix
+      setLoadingMessages(false);
     }
   };
 
@@ -75,13 +75,13 @@ function Chat() {
 
     try {
       const data = await sendMessage(selectedConversation._id, {
-        content: messageText, // fix
+        content: messageText,
       });
 
       setMessages((prev) => [
         ...prev,
         data.userMessage,
-        data.assistantMessage, // fix
+        data.assistantMessage,
       ]);
 
       await loadConversations();
@@ -126,11 +126,18 @@ function Chat() {
       />
 
       <div className="flex-1 flex flex-col">
+        <div className="border-b border-zinc-800 px-6 py-4 bg-zinc-900">
+          <h1 className="text-lg font-semibold">
+            {selectedConversation?.title || "AI Chat"}
+          </h1>
+        </div>
+
         <ChatWindow
           messages={messages}
           selectedConversation={selectedConversation}
           loading={loadingMessages}
         />
+
         <MessageInput
           onSendMessage={handleSendMessage}
           sending={sendingMessage}
