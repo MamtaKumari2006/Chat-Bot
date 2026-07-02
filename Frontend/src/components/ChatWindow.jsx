@@ -9,8 +9,15 @@ function ChatWindow({ messages, selectedConversation, loading }) {
 
   if (!selectedConversation) {
     return (
-      <div className="flex-1 flex items-center justify-center text-zinc-400">
-        <p>Select a chat or create a new one</p>
+      <div className="flex-1 flex items-center justify-center text-zinc-400 bg-transparent">
+        <div className="text-center">
+          <p className="text-lg font-medium text-white mb-2">
+            Welcome to AI Chat
+          </p>
+          <p className="text-sm text-zinc-400">
+            Select a chat or create a new one
+          </p>
+        </div>
       </div>
     );
   }
@@ -24,7 +31,7 @@ function ChatWindow({ messages, selectedConversation, loading }) {
   }
 
   return (
-    <div className="flex-1 p-4 overflow-y-auto bg-zinc-950">
+    <div className="flex-1 p-6 overflow-y-auto bg-transparent">
       {messages.length === 0 ? (
         <p className="text-zinc-400 text-center">
           No messages yet. Start a new conversation!
@@ -33,21 +40,21 @@ function ChatWindow({ messages, selectedConversation, loading }) {
         messages.map((message) => (
           <div
             key={message._id}
-            className={`flex mb-3 ${
+            className={`flex mb-4 ${
               message.role === "user" ? "justify-end" : "justify-start"
             }`}
           >
             <div
-              className={`max-w-2xl px-4 py-3 rounded-xl whitespace-pre-wrap ${
+              className={`max-w-2xl px-4 py-3 rounded-2xl whitespace-pre-wrap shadow-sm ${
                 message.role === "user"
-                  ? "bg-blue-600 text-white"
-                  : "bg-zinc-800 text-zinc-100"
+                  ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
+                  : "bg-white/10 backdrop-blur-md text-zinc-100 border border-white/10"
               }`}
             >
-              <p className="text-xs mb-1 opacity-60">
+              <p className="text-xs mb-1 opacity-70">
                 {message.role === "user" ? "You" : "AI"}
               </p>
-              <p>{message.content}</p>
+              <p className="leading-relaxed">{message.content}</p>
             </div>
           </div>
         ))

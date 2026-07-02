@@ -14,9 +14,9 @@ const chatWithAi = async (req, res) => {
         if (!conversation) {
             return res.status(404).json({ message: 'Conversation not found' });
         }
-        // Call OpenAI API
+        // Call Llama API
         const response = await axios.post("http://localhost:11434/api/chat", {
-      model: "phi3:mini",
+      model: 'llama-3.1-8b-instant"',
         messages: [
             { role: "system", content: "You are a helpful assistant." },
             { role: "user", content: message }
@@ -37,10 +37,10 @@ const chatWithAi = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Ollama Error:", error.message);
+    console.error("llama Error:", error.message);
     res.status(500).json({
       success: false,
-      error: "not able to connect to ollama server check if it is running and the url is correct"
+      error: "not able to connect to llama server check if it is running and the url is correct"
     });
   }
 

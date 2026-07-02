@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Conversation = require('../models/chats.model');
 const { Message } = require('../models/message.model');
-const { getOllamaReply } = require('../services/ollama.server');
+const { getGroqReply } = require('../services/groq.service');
 
 function estimateTokens(text = '') {
     if (!text.trim()) return 0;
@@ -53,23 +53,23 @@ async function sendMessage(req, res) {
             conversationId: conversation._id
         }).sort({ createdAt: 1 });
 
-        // 3. Format messages for Ollama
-        const ollamaMessages = history.map((msg) => ({
+        // 3. Format messages for Groq
+        const groqMessages = history.map((msg) => ({
             role: msg.role,
             content: msg.content
         }));
 
-        // 4. Call Ollama - FIX HERE
+        // 4. Call Groq - FIX HERE
         const startTime = Date.now();
 
         let aiReply = '';
         try {
-            aiReply = await getOllamaReply({
-                model: conversation.model || process.env.OLLAMA_MODEL || 'phi3:mini',
-                messages: ollamaMessages
+            aiReply = await getGroqReply({
+                model: process.env.GROQ_MODEL || 'llama-3.1-8b-instant',
+                messages: groqMessages
             });
-        } catch (ollamaError) {
-            console.log('Ollama Error:', ollamaError.message);
+        } catch (groqError) {
+            console.log('Groq Error:', groqError.message);
 
             const failedMessage = await Message.create({
                 conversationId: conversation._id,

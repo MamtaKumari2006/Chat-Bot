@@ -14,8 +14,8 @@ const conversationSchema = new mongoose.Schema({
         type: String,
     },
     model: {
-    type: String,
-    default: process.env.OLLAMA_MODEL || 'phi3:mini'
+        type: String,
+        default: process.env.GROQ_MODEL || 'llama-3.1-8b-instant'
     },
     isArchived: {
         type: Boolean,

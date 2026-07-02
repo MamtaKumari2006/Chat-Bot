@@ -15,12 +15,12 @@ function MessageInput({ onSendMessage, sending }) {
       e.preventDefault();
       handleSubmit(e);
     }
-  }; // ← ye brace missing thi
+  };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 border-t border-zinc-800 bg-zinc-950"
+      className="p-4 border-t border-white/10 bg-black/20 backdrop-blur-md"
     >
       <div className="flex gap-3 items-center">
         <textarea
@@ -30,13 +30,13 @@ function MessageInput({ onSendMessage, sending }) {
           placeholder="Type your message..."
           onKeyDown={handleKeyDown}
           disabled={sending}
-          className="flex-1 bg-zinc-800 text-white px-4 py-3 rounded-lg outline-none resize-none disabled:opacity-50"
+          className="flex-1 bg-white/10 text-white placeholder:text-zinc-400 px-4 py-3 rounded-xl outline-none resize-none border border-white/10 focus:border-blue-500/50 disabled:opacity-50"
         />
 
         <button
           type="submit"
           disabled={sending || !text.trim()}
-          className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg text-white disabled:opacity-50"
+          className="bg-linear-to-r from-blue-600 via-purple-600 to-indigo-600 hover:opacity-90 px-5 py-3 rounded-xl text-white font-medium disabled:opacity-50 transition"
         >
           {sending ? "..." : "Send"}
         </button>

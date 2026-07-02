@@ -1,4 +1,5 @@
 
+import close from "../assets/close.svg";
 
 function Sidebar({
   conversations,
@@ -7,15 +8,24 @@ function Sidebar({
   onCreateConversation,
   onDeleteConversation,
   onLogout,
+  onClose,
 }) {
   return (
-    <div className="w-80 bg-zinc-900 border-r border-zinc-800 h-screen flex flex-col">
-      <div className="p-4 border-b border-zinc-800">
+    <div className="w-80 h-screen flex flex-col bg-zinc-950/80 backdrop-blur-md border-r border-white/10">
+
+      <div className="p-4 border-b border-white/10 flex items-center justify-between">
         <button
           onClick={onCreateConversation}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg"
+          className="bg-linear-to-r from-blue-600 via-purple-600 to-indigo-600 hover:opacity-90 text-white py-2.5 px-4 rounded-xl font-medium transition"
         >
           + New Chat
+        </button>
+
+        <button
+          onClick={onClose}
+          className="hover:opacity-80 transition"
+        >
+          <img src={close} alt="close" className="invert h-5 w-5" />
         </button>
       </div>
 
@@ -28,12 +38,12 @@ function Sidebar({
           conversations.map((conversation) => (
             <div
               key={conversation._id}
-              className={`p-3 rounded-lg flex items-center justify-between cursor-pointer ${
-                selectedConversation?._id === conversation._id
-                  ? "bg-zinc-700"
-                  : "bg-zinc-800 hover:bg-zinc-700"
-              }`}
               onClick={() => onSelectConversation(conversation)}
+              className={`p-3 rounded-xl flex items-center justify-between cursor-pointer transition ${
+                selectedConversation?._id === conversation._id
+                  ? "bg-linear-to-r from-blue-900/40 to-purple-900/40 border border-blue-500/20"
+                  : "bg-white/5 hover:bg-white/10 border border-transparent"
+              }`}
             >
               <p className="text-white text-sm truncate flex-1">
                 {conversation.title || "New Chat"}
@@ -44,7 +54,7 @@ function Sidebar({
                   e.stopPropagation();
                   onDeleteConversation(conversation._id);
                 }}
-                className="text-red-400 text-xs ml-2"
+                className="text-red-400 hover:text-red-300 text-xs ml-2"
               >
                 Delete
               </button>
@@ -53,10 +63,10 @@ function Sidebar({
         )}
       </div>
 
-      <div className="p-4 border-t border-zinc-800">
+      <div className="p-4 border-t border-white/10 flex justify-center">
         <button
           onClick={onLogout}
-          className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg"
+          className="w-1/2 bg-red-600/90 hover:bg-red-600 text-white py-2.5 rounded-full font-medium transition"
         >
           Logout
         </button>

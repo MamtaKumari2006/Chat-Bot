@@ -2,15 +2,15 @@ import {Navigate} from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
 function ProtectedRouter({children}){
-    const {user, Loading} = useAuth();
+    const {user, loading} = useAuth();
 
-    if(Loading){
+    if(loading){
         return(
             <div className="min-h-screen justify-center flex items-center bg-zinc-950">Loading...</div>
         )
     }
     if(!user){
-        return <Navigate to ="/login" replace={true} />
+        return <Navigate to ="/login" replace />
     }
     return children;
 
