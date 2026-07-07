@@ -8,16 +8,17 @@ const messageRoutes = require('./routes/message.route.js');
 
 const app = express();
 
-
 app.use(cors({
-  origin: "http://chat-bot-two-woad.vercel.app",
+  origin: [
+    "https://chat-bot-two-woad.vercel.app",
+    "http://localhost:5173"
+  ],
   credentials: true
 }));
 
 app.use(cookieParser());
 app.use(express.json());
 
-// Routes
 app.use("/api/chat", chatRoutes);
 app.use("/api/conversation", coversationRoutes);
 app.use("/api/auth", authRoutes);
