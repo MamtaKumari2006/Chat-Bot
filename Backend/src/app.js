@@ -8,9 +8,9 @@ const messageRoutes = require('./routes/message.route.js');
 
 const app = express();
 
-// CORS fix - sabse pehle lagao
+
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "http://chat-bot-two-woad.vercel.app",
   credentials: true
 }));
 
