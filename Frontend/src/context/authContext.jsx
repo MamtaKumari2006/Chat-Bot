@@ -34,6 +34,7 @@ const login = async (userData) => {
         console.log(err)
         setUser(null)
         setLoading(false);
+        throw err;
 
 
     }
@@ -56,6 +57,7 @@ const logout = async () => {
         await logoutUser();
     } catch (error) {
         console.log("Logout error:", error);
+        throw error;
     } finally {
         setUser(null);
     }
