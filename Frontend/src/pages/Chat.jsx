@@ -159,9 +159,9 @@ return (
       />
     </div>
 
-    <div className="flex-1 flex flex-col h-screen overflow-hidden bg-black/10 backdrop-blur-sm">
+    <div className="flex-1 min-h-0 flex flex-col overflow-hidden bg-black/10 backdrop-blur-sm">
       
-      <div className="sticky top-0 z-10 border-b border-white/5 px-6 py-4 bg-zinc-950/80 backdrop-blur-xl flex items-center gap-4">
+      <div className="shrink-0 border-b border-white/5 px-6 py-4 bg-zinc-950/80 backdrop-blur-xl flex items-center gap-4">
         {!sidebarOpen && (
           <button
             onClick={() => setSidebarOpen(true)}

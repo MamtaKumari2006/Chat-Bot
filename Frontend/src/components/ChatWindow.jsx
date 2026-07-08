@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 
 function ChatWindow({ messages, selectedConversation, loading }) {
-  const bottomRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [messages]);
 
   if (!selectedConversation) {
@@ -31,7 +33,10 @@ function ChatWindow({ messages, selectedConversation, loading }) {
   }
 
   return (
-    <div className="flex-1 min-h-0 overflow-y-auto p-6 bg-transparent">
+    <div
+      ref={scrollRef}
+      className="flex-1 min-h-0 overflow-y-auto p-6 bg-transparent"
+    >
       {messages.length === 0 ? (
         <p className="text-zinc-400 text-center">
           No messages yet. Start a new conversation!
@@ -59,7 +64,6 @@ function ChatWindow({ messages, selectedConversation, loading }) {
           </div>
         ))
       )}
-      <div ref={bottomRef} />
     </div>
   );
 }
