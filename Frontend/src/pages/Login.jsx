@@ -34,7 +34,13 @@ function Login() {
 
             navigate("/chat");
         } catch (err) {
-            setError(err.response?.data?.message || "Login failed, please try again");
+            const message = err?.response?.data?.message || "Login failed, please try again";
+
+            if (message === "Invalid credentials") {
+                setError("Account not found or password is incorrect. Please register first or check your credentials.");
+            } else {
+                setError(message);
+            }
         }
     };
 
@@ -109,7 +115,7 @@ function Login() {
                     <div className="flex justify-center pt-2">
                         <button
                             type="submit"
-                            className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 hover:from-blue-700 hover:via-purple-700 hover:to-pink-600 text-white py-2 px-8 rounded-xl font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300"
+                            className="bg-linear-to-r from-blue-600 via-purple-600 to-pink-500 hover:from-blue-700 hover:via-purple-700 hover:to-pink-600 text-white py-2 px-8 rounded-xl font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300"
                         >
                             Login
                         </button>
