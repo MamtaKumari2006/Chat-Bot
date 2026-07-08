@@ -6,21 +6,14 @@ A full-stack AI-powered chat application built with **React**, **Node.js**, **Mo
 
 ## 🌐 Live Demo
 
-- **Frontend**: [your-vercel-url](https://your-vercel-url.vercel.app)
-- **Backend**: [your-render-url](https://your-render-url.onrender.com)
+- **Frontend**: https://chat-bot-two-woad.vercel.app/
+- **Backend**: https://chat-bot-9pc9.onrender.com/
 
 ---
 
-## 📸 Screenshots
 
-### Register Page
-![Register](./screenshots/register.png)
 
-### Login Page
-![Login](./screenshots/login.png)
 
-### Chat Page
-![Chat](./screenshots/chat.png)
 
 ---
 
@@ -133,14 +126,14 @@ ai-chat-app/
 ### Prerequisites
 - Node.js (v18+)
 - MongoDB Atlas Account
-- Groq API Key ([console.groq.com](https://console.groq.com))
+- Groq API Key https://console.groq.com/keys
 
 ---
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/MamtaKumari2006/Chat-Bot
 cd your-repo-name
 ```
 
@@ -296,8 +289,8 @@ User → Frontend (React)
 
 **Your Name**
 
-- GitHub: [@your-username](https://github.com/your-username)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/your-profile)
+- GitHub: https://github.com/MamtaKumari2006
+- LinkedIn: https://www.linkedin.com/in/mamta-kumari-262b6b373/
 
 ---
 

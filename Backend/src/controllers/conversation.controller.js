@@ -74,19 +74,33 @@ async function updateConversation(req, res) {
     }
 }
 
-// Soft delete a conversation
+// Permanent delete a conversation
 async function deleteConversation(req, res) {
     try {
-        const conversation = await Conversation.findOne({ _id: req.params._id, userId: req.user._id, isDeleted: false });
+        const conversation = await Conversation.findOne({
+            _id: req.params._id,
+            userId: req.user._id
+        });
+
         if (!conversation) {
             return res.status(404).json({ error: 'Conversation not found' });
         }
-        conversation.isDeleted = true;
-        await conversation.save();
-        res.status(200).json({ message: 'Conversation deleted successfully' });
+
+        // Pehle us conversation ke saare messages delete karo
+        await Message.deleteMany({ conversationId: conversation._id });
+
+        // Fir conversation permanently delete karo
+        await Conversation.deleteOne({ _id: conversation._id });
+
+        res.status(200).json({
+            message: 'Conversation deleted permanently'
+        });
+
     } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: 'Failed to delete conversation' });
+        console.log(error);
+        res.status(500).json({
+            error: 'Failed to delete conversation'
+        });
     }
 }
 
