@@ -9,7 +9,7 @@ function ChatWindow({ messages, selectedConversation, loading }) {
 
   if (!selectedConversation) {
     return (
-      <div className="flex-1 flex items-center justify-center text-zinc-400 bg-transparent">
+      <div className="flex-1 min-h-0 flex items-center justify-center text-zinc-400 bg-transparent">
         <div className="text-center">
           <p className="text-lg font-medium text-white mb-2">
             Welcome to AI Chat
@@ -24,14 +24,14 @@ function ChatWindow({ messages, selectedConversation, loading }) {
 
   if (loading) {
     return (
-      <div className="flex-1 flex items-center justify-center text-zinc-400">
+      <div className="flex-1 min-h-0 flex items-center justify-center text-zinc-400">
         <p>Loading messages...</p>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 p-6 overflow-y-auto bg-transparent">
+    <div className="flex-1 min-h-0 overflow-y-auto p-6 bg-transparent">
       {messages.length === 0 ? (
         <p className="text-zinc-400 text-center">
           No messages yet. Start a new conversation!

@@ -147,7 +147,6 @@ function Chat() {
 return (
   <div className="h-screen text-white flex overflow-hidden bg-linear-to-br from-zinc-950 via-slate-950 to-indigo-950">
     
-    {/* Sidebar with transition */}
     <div className={`transition-all duration-300 ${sidebarOpen ? "w-80" : "w-0"} overflow-hidden`}>
       <Sidebar
         conversations={conversations}
@@ -160,17 +159,15 @@ return (
       />
     </div>
 
-    <div className="flex-1 flex flex-col overflow-hidden bg-black/10 backdrop-blur-sm min-h-60vh">
+    <div className="flex-1 flex flex-col h-screen overflow-hidden bg-black/10 backdrop-blur-sm">
       
-      {/* Header with menu button */}
-      <div className="border-b border-white/5 px-6 py-4 bg-linear-to-r from-blue-900/10 via-purple-900/10 to-indigo-900/10 backdrop-blur-xl flex items-center gap-4 sticky top-0 z-10">
-        
+      <div className="sticky top-0 z-10 border-b border-white/5 px-6 py-4 bg-zinc-950/80 backdrop-blur-xl flex items-center gap-4">
         {!sidebarOpen && (
           <button
             onClick={() => setSidebarOpen(true)}
             className="text-white text-xl hover:text-blue-400 transition"
           >
-            <img src={hamburger} alt="hamburger" className="invert w-6 h-6"/>
+            <img src={hamburger} alt="hamburger" className="invert w-6 h-6" />
           </button>
         )}
 
