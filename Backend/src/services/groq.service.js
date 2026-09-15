@@ -1,25 +1,20 @@
 async function getGroqReply({ model, messages }) {
-  let apiKey = (process.env.GROQ_API_KEY || "").trim().replace(/['"]/g, "");
-  let modelName = (model || process.env.GROQ_MODEL || "llama-3.3-70b-versatile").trim().replace(/['"]/g, "");
+  const apiKey = (process.env.GROQ_API_KEY || "").trim().replace(/['"]/g, "");
 
   if (!apiKey) {
     throw new Error("GROQ_API_KEY is missing in environment variables!");
   }
 
-  // Fallback models agar pehla model fail ho jaye
-  const fallbackModels = [
-    modelName,
-    "llama-3.3-70b-versatile",
-    "llama-3.1-8b-instant",
-    "gemma2-9b-it"
+  // Tumhare account ki actual available models list (prioritized order mein)
+  const workingModels = [
+    "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b",
+    "qwen/qwen3.8-27b"
   ];
 
-  // Unique model list
-  const modelsToTry = [...new Set(fallbackModels)];
-
-  for (const currentModel of modelsToTry) {
+  for (const currentModel of workingModels) {
     try {
-      console.log(`Trying Groq model: ${currentModel}`);
+      console.log(`Sending request with active model: ${currentModel}`);
 
       const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
@@ -38,28 +33,17 @@ async function getGroqReply({ model, messages }) {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(`Success with model: ${currentModel}`);
+        console.log(`Success! Response received from ${currentModel}`);
         return data?.choices?.[0]?.message?.content || "";
       }
 
-      console.warn(`Model ${currentModel} failed:`, data?.error?.message);
+      console.warn(`Model ${currentModel} returned error:`, data?.error?.message);
     } catch (err) {
-      console.warn(`Network error with model ${currentModel}:`, err.message);
+      console.warn(`Error connecting with ${currentModel}:`, err.message);
     }
   }
 
-  // Agar saare predefined models fail ho jayein, toh Groq se direct list mangwao
-  try {
-    const listRes = await fetch("https://api.groq.com/openai/v1/models", {
-      headers: { Authorization: `Bearer ${apiKey}` },
-    });
-    const listData = await listRes.json();
-    console.log("Your account's available Groq models:", listData?.data?.map(m => m.id));
-  } catch (e) {
-    console.error("Could not fetch models list:", e.message);
-  }
-
-  throw new Error("All Groq models failed. Check Render logs for available models list.");
+  throw new Error("Failed to generate response from available Groq models.");
 }
 
 module.exports = { getGroqReply };
