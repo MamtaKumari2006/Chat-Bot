@@ -124,7 +124,7 @@ function Register() {
                     <div className="flex justify-center">
                         <button
                             type="submit"
-                            className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 hover:from-blue-700 hover:via-purple-700 hover:to-pink-600 text-white py-2 px-6 rounded-xl font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300"
+                            className="bg-linear-to-r from-blue-600 via-purple-600 to-pink-500 hover:from-blue-700 hover:via-purple-700 hover:to-pink-600 text-white py-2 px-6 rounded-xl font-semibold shadow-lg shadow-purple-500/20 transition-all duration-300"
                         >
                             Register
                         </button>
